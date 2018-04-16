@@ -48,7 +48,8 @@ class FixerTestCase(support.TestCase):
         self.warns(before, before, message, unchanged=True)
 
     def unchanged(self, before, ignore_warnings=False):
-        self._check(before, before)
+        tree = self._check(before, before)
+        self.assertFalse(tree.was_changed)
         if not ignore_warnings:
             self.assertEqual(self.fixer_log, [])
 
